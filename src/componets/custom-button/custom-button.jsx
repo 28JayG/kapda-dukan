@@ -2,9 +2,15 @@ import React from "react";
 
 import "./custom-button.scss";
 
-const CustomButton = ({ children, isGoogleSignIn, ...otherCBProps }) => (
+const CustomButton = ({
+  children,
+  isGoogleSignIn,
+  inverted,
+  ...otherCBProps
+}) => (
   <button
-    className={`${isGoogleSignIn ? 'google-sign-in' : ''} custom-button`}
+    className={`${inverted ? "inverted" : ""} 
+    ${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
     {...otherCBProps}
   >
     {children.toUpperCase()}
