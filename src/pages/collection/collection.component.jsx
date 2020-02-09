@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import CollectionItem from "../../componets/collection-item/collection-item";
+import CollectionItem from "../../componets/collection-item/collection-item.component";
 import { selectCollection } from "../../redux/shop/shop.selectors";
 
-import "./collection.scss";
+import "./collection.styles.scss";
 
 const CollectionPage = ({ collection, match }) => {
   console.log(match.params.collectionId)

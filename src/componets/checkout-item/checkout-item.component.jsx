@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./checkout-item.scss";
+import "./checkout-item.styles.scss";
 import {
   clearItemFromCart,
   removeItem,
