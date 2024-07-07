@@ -1,34 +1,31 @@
-import shopActionTypes from "./shop.types";
-import {
-  firestore,
-  convertCollectionSnapshotToMap
-} from "../../firebase/firebase.utils";
+import { collection, getDocs } from 'firebase/firestore/lite';
+import { convertCollectionSnapshotToMap } from '../../firebase/firebase.utils';
+import shopActionTypes from './shop.types';
 
 export const fetchCollectionsStart = () => ({
-  type: shopActionTypes.FETCH_COLLECTIONS_START
+  type: shopActionTypes.FETCH_COLLECTIONS_START,
 });
 
-export const fetchCollectionsSuccess = collectionsMap => ({
+export const fetchCollectionsSuccess = (collectionsMap) => ({
   type: shopActionTypes.FETCH_COLLECTIONS_SUCCESS,
-  payload: collectionsMap
+  payload: collectionsMap,
 });
 
-export const fetchCollectionsFailure = errorMessage => ({
+export const fetchCollectionsFailure = (errorMessage) => ({
   type: shopActionTypes.FETCH_COLLECTIONS_FAILURE,
-  payload: errorMessage
+  payload: errorMessage,
 });
 
 export const fetchCollectionsStartAsyn = () => {
-  return dispatch => {
-    const collectionsRef = firestore.collection("collections");
+  return (dispatch) => {
+    const collectionsRef = collection('collections');
     dispatch(fetchCollectionsStart());
 
-    collectionsRef
-      .get()
-      .then(snapshot => {
+    getDocs(collectionsRef)
+      .then((snapshot) => {
         const collectionsMap = convertCollectionSnapshotToMap(snapshot);
         dispatch(fetchCollectionsSuccess(collectionsMap));
       })
-      .catch(err => dispatch(fetchCollectionsFailure(err.message)));
+      .catch((err) => dispatch(fetchCollectionsFailure(err.message)));
   };
 };

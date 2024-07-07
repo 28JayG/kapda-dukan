@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchCollectionsStart } from '../../redux/shop/shops.actions';
 
@@ -14,8 +14,10 @@ const ShopPage = ({ fetchCollectionsStart }) => {
 
   return (
     <div className={'shop-page'}>
-      <Route path={`/`} element={<CollectionsOverviewContainer />} />
-      <Route path={`/:collectionId`} element={<CollectionPageContainer />} />
+      <Routes>
+        <Route path={`/`} element={<CollectionsOverviewContainer />} />
+        <Route path={`/:collectionId`} element={<CollectionPageContainer />} />
+      </Routes>
     </div>
   );
 };
